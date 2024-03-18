@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup Page</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-name">
+    <a href="pop.html">
+    <img class= "shadow-pop-bl" src="/Users/indumadireddy/Downloads/logos (1)/FlyEase.png" width=300px height="100px">
+    </a>
+  </div>
+  <div class="text">
+    <p class="text-focus-in">Hello again <br>Your trusted companion for seamless air travel experiences<br>
+      Discover the ease of flying with us as we prioritize your comfort and convenience at every step of your journey. <br>
+      Embark on your next adventure with confidence and ease, starting right here with FlyEase.</p>
+    </div>
+<div class="container">
+  <div id="signup-form">
+    <h2 class="check-in">Login</h2>
+    <form id="signup">
+      <input type="text" id="signup-username" placeholder="Username" required minlength="6">
+      <input type="password" id="signup-password" placeholder="Password" required minlength="8">
+      <button type="submit">Board Now</button>
+    </form>
+  </div>
+</div>
+<footer>
+<div class="footer">
+  <div class="links">
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+      <a href="#">Jobs</a>
+      <a href="#">Help</a>
+      <a href="#">API</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Locations</a>
+      <a href="#" id="darkmode-toggle">Darkmode</a>
+  </div>
+</div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
+<html>
+    <style>
+body {
+  background-color:rgb(24, 23, 23) ;
+    font-family: Arial, sans-serif;
+    
+    text-align: center;
+  }
+  .check-in{
+    color: white;
+  }
+  .site-name 
+    {
+    display: inline-block; /* Ensures the container takes up only as much space as necessary */
+    overflow: hidden; /* Prevents any content overflow */
+    border-radius: 20px;
+}
+.text-shadow-pop-top {
+	animation: text-shadow-pop-top 0.4s both;
+}
+@keyframes text-shadow-pop-top {
+  0% {
+    text-shadow: 0 0 #555555, 0 0 #555555, 0 0 #555555, 0 0 #555555, 0 0 #555555, 0 0 #555555, 0 0 #555555, 0 0 #555555;
+    transform: translateY(0);
+  }
+  100% {
+    text-shadow: 0 -1px #555555, 0 -2px #555555, 0 -3px #555555, 0 -4px #555555, 0 -5px #555555, 0 -6px #555555, 0 -7px #555555, 0 -8px #555555;
+    transform: translateY(8px);
+  }
+}
+
+
+
+.site-name img {
+    display: block; /* Ensures the image behaves like a block element */
+    max-width: 100%; /* Makes sure the image does not exceed the width of its container */
+    height: 15%; /* Allows the image to maintain its aspect ratio */
+    border: none; /* Removes any border around the image */
+    border-bottom: 2px solid #ccc;
+    position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      border-radius: 300px;
+      
+}
+.shadow-pop-bl {
+	animation: shadow-pop-bl 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+}
+ @keyframes shadow-pop-bl {
+  0% {
+    box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    box-shadow: -1px 1px #3e3e3e, -2px 2px #3e3e3e, -3px 3px #3e3e3e, -4px 4px #3e3e3e, -5px 5px #3e3e3e, -6px 6px #3e3e3e, -7px 7px #3e3e3e, -8px 8px #3e3e3e;
+    transform: translateX(8px) translateY(-8px);
+  }
+}
+
+
+
+
+
+.text
+{
+  text-align: left; /* Align text to the left */
+  max-width: 600px; /* Limit the width of the container */
+  padding: 20px;
+  margin: 20px auto;
+  line height:1.5 ;
+  position: absolute;
+      top: 150px;
+      left: 150px;
+      margin: 0;
+      border-radius: 300px;
+  
+  
+}
+.text-focus-in {
+	animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+ @keyframes text-focus-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+.text p {
+  
+  color: white; /* Set text color to white */
+  font-family: fantasy;
+  font-style: oblique;
+  font-size: 25px; /* Set font size */
+  line-height: 1.5; /* Set line height for better readability */
+}
+
+  .container {
+  
+  margin-left: 20px;
+  position: absolute;
+      top: 150px;
+      right: 200px ;
+      margin: 10px;
+      border-radius: 300px;
+   
+  max-width: 300px;
+
+}
+  #login-form,
+  #signup-form {
+    margin: 35px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 85%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  .form-footer {
+
+  margin-top: 10px;
+}
+
+.form-footer p {
+  color:white;
+  font-size: 0.9em;
+}
+
+.form-footer a {
+  text-decoration: none;
+  color: #008CBA;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+.footer {
+  color: white;
+    padding-bottom: 52px;
+    padding-top: 700px;
+}
+.dark {
+    --body-bg: hsl(0, 27%, 94%);
+    --box-bg: #151515;
+    --box-border-color: #d8d5d5;
+    --txt-color: #d2d2d2;
+}
+.links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.links a {
+    text-decoration: none;
+    color: #008cba;
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0 8px 12px 8px;
+}
+  </style>
+  </html>
+  </html>
+    <html>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  // Get the login and signup forms by their IDs
+  var loginForm = document.getElementById('login');
+  var signupForm = document.getElementById('signup');
+
+  // Function to validate the username and password
+  function validateForm(event) {
+    var username = event.target.elements[0].value;
+    var password = event.target.elements[1].value;
+    var minLengthUsername = 6;
+    var minLengthPassword = 8;
+
+    if (username.length < minLengthUsername) {
+      alert('Username must be at least ' + minLengthUsername + ' characters long.');
+      event.preventDefault(); // Prevent form submission
+      return false;
+    }
+
+    if (password.length < minLengthPassword) {
+      alert('Password must be at least ' + minLengthPassword + ' characters long.');
+      event.preventDefault(); // Prevent form submission
+      return false;
+    }
+
+    // If we reach here, everything is valid
+    return true;
+  }
+
+  // Attach submit event listeners to the forms
+  if (loginForm) {
+    loginForm.addEventListener('submit', validateForm);
+  }
+
+  if (signupForm) {
+    signupForm.addEventListener('submit', validateForm);
+  }
+});
+
+</script>
+</html>
