@@ -44,9 +44,18 @@
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date">
             </div>
-            <div class="input-group">
+            <div class="input-group" id="passengers-container">
                 <label for="passengers">Passenger Details:</label>
-                <textarea id="passengers" name="passengers" placeholder="Enter passenger names and ages"></textarea>
+                <div id="passengers-info">
+                    <div class="passenger">
+                        <input type="text" name="passengerName1" placeholder="Passenger Name">
+                        <select name="passengerAge1">
+                            <option value="15">15+</option>
+                            <option value="14">14-</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" onclick="addPassenger()">Add Passenger</button>
             </div>
             <button type="button" onclick="searchFlights()">Submit</button>
         </div>
@@ -54,32 +63,50 @@
     </div>
 
     <script>
+        var totalPassengers = 1; // Initial number of passengers
+
+        function addPassenger() {
+            totalPassengers++;
+            var passengersContainer = document.getElementById("passengers-info");
+            var passengerDiv = document.createElement("div");
+            passengerDiv.classList.add("passenger");
+            passengerDiv.innerHTML = `
+    <input type="text" name="passengerName${totalPassengers}" placeholder="Passenger Name">
+    <select name="passengerAge${totalPassengers}">
+        <option value="15">15+</option>
+        <option value="14">14-</option>
+    </select>
+`;
+        }
+passengersContainer.appendChild(passengerDiv);
+
         function searchFlights() {
             var from = document.getElementById("from").value;
             var to = document.getElementById("to").value;
             var date = document.getElementById("date").value;
-            var passengers = document.getElementById("passengers").value;
+
+            // Resetting total price for each search
+            var totalPrice = 0;
 
             var flights = [
-                { company: "Air India", price: "5000", time: "09:00 AM" },
-                { company: "IndiGo", price: "5500", time: "10:00 AM" },
-                { company: "SpiceJet", price: "4800", time: "11:00 AM" },
-                { company: "Vistara", price: "6000", time: "12:00 PM" },
-                { company: "GoAir", price: "5200", time: "01:00 PM" },
-                { company: "AirAsia", price: "5300", time: "02:00 PM" },
-                { company: "Jet Airways", price: "6500", time: "03:00 PM" },
-                { company: "Air India", price: "5200", time: "04:00 PM" },
-                { company: "IndiGo", price: "5800", time: "05:00 PM" },
-                { company: "SpiceJet", price: "5000", time: "06:00 PM" }
+                { company: "Air India", price: 5000, time: "09:00 AM" },
+                { company: "IndiGo", price: 5500, time: "10:00 AM" },
+                { company: "SpiceJet", price: 4800, time: "11:00 AM" },
+                { company: "Vistara", price: 6000, time: "12:00 PM" },
+                { company: "GoAir", price: 5200, time: "01:00 PM" },
+                { company: "AirAsia", price: 5300, time: "02:00 PM" },
+                { company: "Jet Airways", price: 6500, time: "03:00 PM" },
+                { company: "Air India", price: 5200, time: "04:00 PM" },
+                { company: "IndiGo", price: 5800, time: "05:00 PM" },
+                { company: "SpiceJet", price: 5000, time: "06:00 PM" }
             ];
 
             var flightsList = document.getElementById("flights-list");
-            flightsList.innerHTML = ''; 
+            flightsList.innerHTML = '';
 
             flights.forEach(function(flight) {
                 var flightBox = document.createElement("div");
                 flightBox.classList.add("flight-box");
-                flightBox.style.backgroundImage = 'url("path/to/clouds.jpg")';
 
                 var flightInfo = document.createElement("div");
                 flightInfo.classList.add("flight-info");
@@ -88,7 +115,15 @@
                 company.textContent = "Company: " + flight.company;
 
                 var price = document.createElement("p");
-                price.textContent = "Price: " + flight.price + " INR";
+                var passengerPrice = flight.price;
+                for (var i = 1; i <= totalPassengers; i++) {
+                    var passengerAge = document.getElementsByName("passengerAge" + i)[0].value;
+                    if (passengerAge < 15) {
+                        passengerPrice /= 2; // If passenger age is less than 15, half the price
+                    }
+                }
+                totalPrice += passengerPrice;
+                price.textContent = "Price per Ticket: " + passengerPrice + " INR";
 
                 var time = document.createElement("p");
                 time.textContent = "Time: " + flight.time;
@@ -101,7 +136,15 @@
 
                 flightsList.appendChild(flightBox);
             });
+
+            // Display total price
+            var totalDiv = document.createElement("div");
+            totalDiv.textContent = "Total Price for " + totalPassengers + " Passenger(s): " + totalPrice + " INR";
+            flightsList.appendChild(totalDiv);
         }
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
