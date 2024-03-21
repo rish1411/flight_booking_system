@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center align container content */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align form elements */
+}
+
+.input-group {
+    width: calc(25% - 20px); /* Adjust width to fit 4 elements with spacing */
+    margin: 0 10px; /* Add spacing between elements */
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+}
+
+select, input[type="date"], textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(100% - 20px); /* Adjust button width to fit within container */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#flights-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flight-box {
+    width: calc(25% - 20px); /* Adjust width to fit 4 elements with spacing */
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.flight-info {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.flight-info p {
+    margin: 5px 0;
+}
