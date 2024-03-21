@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #000;
+    color: #fff; /* Set text color to white */
 }
 
 .container {
@@ -13,10 +14,12 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center; /* Center align container content */
+    color: #000; /* Override text color for container */
 }
 
 h1 {
     margin-bottom: 20px;
+    color: #fff; /* Set text color to white */
 }
 
 .form {
@@ -30,9 +33,11 @@ h1 {
     margin: 0 10px; /* Add spacing between elements */
 }
 
-.label {
+label {
     display: block;
     font-weight: bold;
+    color: #fff; /* Set text color to white */
+    margin-bottom: 5px; /* Add some margin below the label */
 }
 
 select, input[type="date"], textarea {
@@ -52,6 +57,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     width: calc(100% - 20px); /* Adjust button width to fit within container */
+    margin-top: 10px; /* Add some margin on top */
 }
 
 button:hover {
@@ -60,14 +66,11 @@ button:hover {
 
 #flights-list {
     margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .flight-box {
-    width: calc(25% - 20px); /* Adjust width to fit 4 elements with spacing */
-    margin: 10px;
+    width: 100%; /* Make flight box take full width */
+    margin: 10px auto; /* Center align the flight box */
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
