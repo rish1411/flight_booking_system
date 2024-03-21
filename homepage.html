@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking System</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Flight Booking System</h1>
+        <div class="form">
+            <div class="input-group">
+                <label for="from">From:</label>
+                <select id="from" name="from">
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Vellore">Vellore</option>
+                    <option value="Dispur">Dispur</option>
+                    <option value="Bhopal">Bhopal</option>
+                    <option value="Srinagar">Srinagar</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="to">To:</label>
+                <select id="to" name="to">
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Vellore">Vellore</option>
+                    <option value="Dispur">Dispur</option>
+                    <option value="Bhopal">Bhopal</option>
+                    <option value="Srinagar">Srinagar</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="input-group">
+                <label for="passengers">Passenger Details:</label>
+                <textarea id="passengers" name="passengers" placeholder="Enter passenger names and ages"></textarea>
+            </div>
+            <button type="button" onclick="searchFlights()">Submit</button>
+        </div>
+        <div id="flights-list"></div>
+    </div>
+
+    <script>
+        function searchFlights() {
+            var from = document.getElementById("from").value;
+            var to = document.getElementById("to").value;
+            var date = document.getElementById("date").value;
+            var passengers = document.getElementById("passengers").value;
+
+            var flights = [
+                { company: "Air India", price: "5000", time: "09:00 AM" },
+                { company: "IndiGo", price: "5500", time: "10:00 AM" },
+                { company: "SpiceJet", price: "4800", time: "11:00 AM" },
+                { company: "Vistara", price: "6000", time: "12:00 PM" },
+                { company: "GoAir", price: "5200", time: "01:00 PM" },
+                { company: "AirAsia", price: "5300", time: "02:00 PM" },
+                { company: "Jet Airways", price: "6500", time: "03:00 PM" },
+                { company: "Air India", price: "5200", time: "04:00 PM" },
+                { company: "IndiGo", price: "5800", time: "05:00 PM" },
+                { company: "SpiceJet", price: "5000", time: "06:00 PM" }
+            ];
+
+            var flightsList = document.getElementById("flights-list");
+            flightsList.innerHTML = ''; 
+
+            flights.forEach(function(flight) {
+                var flightBox = document.createElement("div");
+                flightBox.classList.add("flight-box");
+                flightBox.style.backgroundImage = 'url("path/to/clouds.jpg")';
+
+                var flightInfo = document.createElement("div");
+                flightInfo.classList.add("flight-info");
+
+                var company = document.createElement("p");
+                company.textContent = "Company: " + flight.company;
+
+                var price = document.createElement("p");
+                price.textContent = "Price: " + flight.price + " INR";
+
+                var time = document.createElement("p");
+                time.textContent = "Time: " + flight.time;
+
+                flightInfo.appendChild(company);
+                flightInfo.appendChild(price);
+                flightInfo.appendChild(time);
+
+                flightBox.appendChild(flightInfo);
+
+                flightsList.appendChild(flightBox);
+            });
+        }
+    </script>
+</body>
+</html>
+
