@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking System</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    
+
+    <div class="site-name">
+        <a href="log-in.html">
+        <img class="shadow-pop-bl" src="/Users/indumadireddy/Downloads/flight details/FlyEase.png" width=300px height="100px">
+        </a>
+    </div>
+    <div class="slider">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+      
+      </div>
+    <div class="container">
+        <h1>Welcome to Flight Booking System</h1>
+        
+        <div class="form">
+            <div class="input-group">
+                <label for="from">From:</label>
+                <select id="from" name="from">
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Vellore">Vellore</option>
+                    <option value="Dispur">Dispur</option>
+                    <option value="Bhopal">Bhopal</option>
+                    <option value="Srinagar">Srinagar</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="to">To:</label>
+                <select id="to" name="to">
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Vellore">Vellore</option>
+                    <option value="Dispur">Dispur</option>
+                    <option value="Bhopal">Bhopal</option>
+                    <option value="Srinagar">Srinagar</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="input-group" id="passengers-container">
+                <label for="passengers">Passenger Details:</label>
+                <div id="passengers-info">
+                    <div class="passenger">
+                        <input type="text" name="passengerName1" placeholder="Passenger Name">
+                        <select name="passengerAge1">
+                            <option value="15">15+</option>
+                            <option value="14">14-</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="add-passenger-btn" onclick="addPassenger()">Add Passenger</button>
+            </div>
+            <div class="input-group radio-group">
+                <p>Select:</p>
+                <div>
+                <input type="radio" id="economy" name="flightClass" value="economy" checked>
+                <label for="economy">Economy Class</label>
+                </div>
+                <div>
+                <input type="radio" id="business" name="flightClass" value="business">
+                <label for="business">Business Class (+10,000)</label>
+                </div>
+            </div>
+            <button type="button" class="submit-btn" onclick="searchFlights()">Submit</button>
+        </div>
+        
+        </div>
+        <div id="flights-list"></div>
+        <footer>
+            <div class="footer">
+              <div class="links">
+                  <a href="about.html">About</a>
+                  <a href="jobs.html">Jobs</a>
+                  <a href="help.html">Help</a>
+                  <a href="#" id="darkmode-toggle">Darkmode</a>
+              </div>
+          </div>
+          </footer>
+    
+      
+</body>
+    <script>
+        var totalPassengers = 1; // Initial number of passengers
+
+        function addPassenger() {
+            totalPassengers++;
+            var passengersContainer = document.getElementById("passengers-info");
+            var passengerDiv = document.createElement("div");
+            passengerDiv.classList.add("passenger");
+            passengerDiv.innerHTML = `
+    <input type="text" name="passengerName${totalPassengers}" placeholder="Passenger Name">
+    <select name="passengerAge${totalPassengers}">
+        <option value="15">15+</option>
+        <option value="14">14-</option>
+    </select>
+`;
+passengersContainer.appendChild(passengerDiv);
+        }
+
+        function searchFlights() {
+            var from = document.getElementById("from").value;
+            var to = document.getElementById("to").value;
+            var date = document.getElementById("date").value;
+
+            // Resetting total price for each search
+            var totalPrice = 0;
+
+            var flights = [
+                { company: "Air India", price: 5000, time: "09:00 AM" },
+                { company: "IndiGo", price: 5500, time: "10:00 AM" },
+                { company: "SpiceJet", price: 4800, time: "11:00 AM" },
+                { company: "Vistara", price: 6000, time: "12:00 PM" },
+                { company: "GoAir", price: 5200, time: "01:00 PM" },
+                { company: "AirAsia", price: 5300, time: "02:00 PM" },
+                { company: "Jet Airways", price: 6500, time: "03:00 PM" },
+                { company: "Air India", price: 5200, time: "04:00 PM" },
+                { company: "IndiGo", price: 5800, time: "05:00 PM" },
+                { company: "SpiceJet", price: 5000, time: "06:00 PM" }
+            ];
+
+            var flightsList = document.getElementById("flights-list");
+            flightsList.innerHTML = '';
+
+            flights.forEach(function(flight) {
+                var flightBox = document.createElement("div");
+                flightBox.classList.add("flight-box");
+
+                var flightInfo = document.createElement("div");
+                flightInfo.classList.add("flight-info");
+
+                var company = document.createElement("p");
+                company.textContent = "Company: " + flight.company;
+
+                var price = document.createElement("p");
+                var passengerPrice = flight.price;
+                for (var i = 1; i <= totalPassengers; i++) {
+                    var passengerAge = document.getElementsByName("passengerAge" + i)[0].value;
+                    if (passengerAge < 15) {
+                        passengerPrice /= 2; // If passenger age is less than 15, half the price
+                    }
+                }
+                totalPrice += passengerPrice;
+                price.textContent = "Price per Ticket: " + passengerPrice + " INR";
+
+                var time = document.createElement("p");
+                time.textContent = "Time: " + flight.time;
+
+                flightInfo.appendChild(company);
+                flightInfo.appendChild(price);
+                flightInfo.appendChild(time);
+
+                flightBox.appendChild(flightInfo);
+
+                flightsList.appendChild(flightBox);
+            });
+
+            
+            var totalDiv = document.createElement("div");
+            totalDiv.textContent = "Total Price for " + totalPassengers + " Passenger(s): " + totalPrice + " INR";
+            flightsList.appendChild(totalDiv);
+        }
+    </script>
+</html>
+<html>
+<style>
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+             /* Changed background color to black */
+        }
+
+.container {
+           position: absolute;  
+            z-index: 1;
+            max-width: 800px;
+            top: 100px;
+            right: 50px;
+            left: 50px;
+            margin: 200px auto;
+            
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            
+            background-color: white;
+        }
+.slider {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+ .slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slide 10s infinite;
+}
+
+@keyframes slide {
+ 0%, 15%, 100% {
+   transform: translateX(0);
+   animation-timing-function: ease;
+ }
+ 20% {
+   transform: translateX(-100%);
+   animation-timing-function: step-end;
+ }
+ 95% {
+   transform: translateX(100%);
+   animation-timing-function: ease;
+ }
+    }
+.slider .slide:nth-child(1) {
+  background-image: url("/Users/indumadireddy/Downloads/flight details/1.jpg");
+  animation-delay: 0s;
+}
+
+.slider .slide:nth-child(2) {
+  background-image: url("/Users/indumadireddy/Downloads/flight details/2.jpg");
+  animation-delay: -4s;
+}
+
+.slider .slide:nth-child(3) {
+  background-image: url("/Users/indumadireddy/Downloads/flight details/3.jpg");
+  animation-delay: -8s;
+}
+
+.slider .slide:nth-child(4) {
+  background-image: url("/Users/indumadireddy/Downloads/flight details/4.jpg");
+  
+  animation-delay: -12s;
+}
+
+.slider .slide:nth-child(5) {
+  background-image: url("/Users/indumadireddy/Downloads/flight details/5.jpg");
+  animation-delay: -16s;
+}
+
+h1 {
+    margin-bottom: 20px;
+    
+}
+
+.site-name 
+        {
+        z-index: 2;
+        display: inline-block; /* Ensures the container takes up only as much space as necessary */
+        overflow: hidden; /* Prevents any content overflow */
+        border-radius: 20px;
+    }
+
+    .site-name img {
+        z-index: 2;
+        display: block; /* Ensures the image behaves like a block element */
+        max-width: 100%; /* Makes sure the image does not exceed the width of its container */
+        height: 15%; /* Allows the image to maintain its aspect ratio */
+        border: none; /* Removes any border around the image */
+        border-bottom: 2px solid #ccc;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        border-radius: 300px;
+        
+    }
+    .shadow-pop-bl {
+        animation: shadow-pop-bl 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+    }
+    @keyframes shadow-pop-bl {
+    0% {
+        box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        box-shadow: -1px 1px #3e3e3e, -2px 2px #3e3e3e, -3px 3px #3e3e3e, -4px 4px #3e3e3e, -5px 5px #3e3e3e, -6px 6px #3e3e3e, -7px 7px #3e3e3e, -8px 8px #3e3e3e;
+        transform: translateX(8px) translateY(-8px);
+    }
+    }
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Center align form elements */
+}
+
+.input-group {
+    width: calc(25% - 20px); /* Adjust width to fit 4 elements with spacing */
+    margin: 0 10px ;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    color: #000000; /* Set text color to black */
+     /* Add some margin below the label */
+}
+
+select, input[type="date"], textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+.input-group.radio-group {
+    margin-left: 280px;
+    display: flex;
+    justify-content: space-between; /* Spacing between radio buttons and labels */
+}
+
+.input-group.radio-group label {
+    flex: 1; /* Take up available space */
+    margin-left: 10px; /* Space between radio button and label */
+}
+
+.input-group.radio-group input[type="radio"] {
+    flex-shrink: 0; /* Do not shrink the radio button */
+    margin-right: 5px; /* Space between radio button and label */
+}
+
+
+.add-passenger-btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(100% - 20px); /* Adjust button width to fit within container */
+    margin-top: 10px; /* Add some margin on top */
+    
+    /* Centering */
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* to make sure margin auto works */
+
+    /* Clearing any previous positioning */
+    position: static;
+    bottom: auto;
+    left: auto;
+    transform: none;
+}
+.submit-btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Adjust button width to fit within container */
+    margin-top: 10px; /* Add some margin on top */
+    margin-left: 250px;
+    margin-right: 200px ;
+     /* to make sure margin auto works */
+
+    /* Clearing any previous positioning */
+    bottom: auto;
+    left: auto;
+    transform: none;
+
+}
+.button:hover {
+    background-color: #45a049;
+}
+
+
+.#flights-list {
+    margin-top: 20px;
+}
+
+.flight-box {
+    
+    width: 50%; /* Make flight box take full width */
+    margin: 10px auto; /* Center align the flight box */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.flight-info {
+    margin-right: 100px;
+    margin-left: 200px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.flight-info p {
+    margin: 5px 0;
+}
+
+.footer {
+color: rgb(7, 7, 7);
+  padding-bottom: 52px;
+  padding-top: 700px;
+}
+.dark {
+  --body-bg: hsl(0, 27%, 94%);
+  --box-bg: #151515;
+  --box-border-color: #d8d5d5;
+  --txt-color: #d2d2d2;
+}
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.links a {
+color: #181717;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0 8px 12px 8px;
+}
+</style>
+</html>
