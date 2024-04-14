@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Set background color to black */
+            color: #fff; /* Set text color to white */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #333; /* Set container background color to dark gray */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .input-group {
+            width: calc(50% - 20px);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        select,
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-top: 5px;
+            background-color: #444; /* Set input background color to darker gray */
+            color: #fff; /* Set input text color to white */
+        }
+
+        .radio-group {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .radio-group label {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .radio-group input[type="radio"] {
+            flex-shrink: 0;
+            margin-right: 5px;
+        }
+
+        .passenger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .passenger input,
+        .passenger select {
+            width: 48%;
+        }
+
+        .add-passenger-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(100% - 20px);
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            position: static;
+            bottom: auto;
+            left: auto;
+            transform: none;
+        }
+
+        .search-flight-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(50% - 20px);
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block; /* Centering the button */
+        }
+
+        .flight-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #222; /* Set flight box background color to black */
+        }
+
+        .flight-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .flight-info span {
+            margin-right: 10px;
+        }
+
+        .flight-info span:last-child {
+            margin-right: 0;
+        }
+
+        .flight-box.selected {
+            background-color: #444; /* Set selected flight box background color to darker gray */
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .footer {
+            color: rgb(7, 7, 7);
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: #fff; /* Change link color to white */
+            text-decoration: none;
+            font-size: 13px;
+            line-height: 18px;
+            margin: 0 8px 12px 8px;
+        }
+
+        .links a:hover {
+            color: #4CAF50; /* Change link color on hover */
+        }
+
+        #total-price-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(100% - 20px);
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            bottom: auto;
+            left: auto;
+            transform: none;
+        }
+
+        #total-price-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to FlyEase</h1>
+
+    <div class="form">
+        <div class="input-group">
+            <label for="departure">Departure:</label>
+            <select id="departure" name="departure">
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Vellore">Vellore</option>
+                <option value="Dispur">Dispur</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Srinagar">Srinagar</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="destination">Destination:</label>
+            <select id="destination" name="destination">
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Vellore">Vellore</option>
+                <option value="Dispur">Dispur</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Srinagar">Srinagar</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date">
+        </div>
+        <div class="input-group" id="passengers-container">
+            <label for="passengers">Passenger Details:</label>
+            <div id="passengers-info">
+                <div class="passenger">
+                    <input type="text" name="passengerName1" placeholder="Passenger Name">
+                    <select name="passengerAge1">
+                        <option value="adult">Adult</option>
+                        <option value="child">Less than 15</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="add-passenger-btn" onclick="addPassenger()">Add Passenger</button>
+        </div>
+        <div class="input-group radio-group">
+            <p>Select:</p>
+            <div>
+                <input type="radio" id="economy" name="flightClass" value="economy" onclick="calculateTotalPrice()">
+                <label for="economy">Economy Class</label>
+            </div>
+            <div>
+                <input type="radio" id="business" name="flightClass" value="business" onclick="calculateTotalPrice()">
+                <label for="business">Business Class (+10,000)</label>
+            </div>
+        </div>
+        <button type="button" class="search-flight-btn" id="search-flight-btn" onclick="searchFlights()">Search Flights</button>
+    </div>
+
+    <div id="flights-list"></div>
+
+    <button type="button" class="search-flight-btn" id="total-price-btn" onclick="showTotalPrice()" disabled>Show Total Price</button>
+</div>
+
+<footer>
+    <div class="footer">
+        <div class="links">
+            <a href="about.html">About</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="help.html">Help</a>
+            <a href="#" id="darkmode-toggle">Darkmode</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    var totalPassengers = 1; // Initial number of passengers
+
+    function addPassenger() {
+        totalPassengers++;
+        var passengersContainer = document.getElementById("passengers-info");
+        var passengerDiv = document.createElement("div");
+        passengerDiv.classList.add("passenger");
+        passengerDiv.innerHTML = `
+            <input type="text" name="passengerName${totalPassengers}" placeholder="Passenger Name">
+            <select name="passengerAge${totalPassengers}">
+                <option value="adult">Adult</option>
+                <option value="child">Less than 15</option>
+            </select>
+        `;
+        passengersContainer.appendChild(passengerDiv);
+    }
+
+    function calculateTotalPrice() {
+        document.getElementById("total-price-btn").disabled = false;
+    }
+
+    function showTotalPrice() {
+    var selectedClass = document.querySelector('input[name="flightClass"]:checked');
+    if (!selectedClass) {
+        showAlert("Please select Economy or Business class.");
+        return;
+    }
+    selectedClass = selectedClass.value;
+
+    var totalPrice = 0;
+
+    // Retrieve the selected flight price from the flight box
+    var selectedFlightPrice = parseFloat(document.querySelector('.flight-box.selected .price').textContent.replace(" INR", ""));
+
+    if (selectedClass === "economy") {
+        totalPrice = selectedFlightPrice;
+    } else if (selectedClass === "business") {
+        totalPrice = selectedFlightPrice + 10000; // Add 10,000 for business class
+    }
+
+    var totalDiv = document.createElement("div");
+    totalDiv.textContent = "Total Price for " + totalPassengers + " Passenger(s) in " + selectedClass + " class: " + totalPrice + " INR";
+    document.getElementById("flights-list").appendChild(totalDiv);
+}
+
+
+    function showAlert(message) {
+        var alertDiv = document.createElement("div");
+        alertDiv.textContent = message;
+        alertDiv.style.color = "red";
+        alertDiv.style.fontWeight = "bold";
+        alertDiv.style.textAlign = "center";
+        document.body.appendChild(alertDiv);
+        setTimeout(function() {
+            alertDiv.remove();
+        }, 3000); // Remove alert after 3 seconds
+    }
+
+    function searchFlights() {
+        var departure = document.getElementById("departure").value;
+        var destination = document.getElementById("destination").value;
+        var date = document.getElementById("date").value;
+
+        // Displaying a message indicating that flights are being searched
+        var searchMessage = document.createElement("div");
+        searchMessage.textContent = "Searching for flights...";
+        document.getElementById("flights-list").innerHTML = ''; // Clear previous flights
+        document.getElementById("flights-list").appendChild(searchMessage);
+
+        // Dummy flight data for demonstration purposes
+        var flights = [
+            { company: "Air India", price: 5000, time: "09:00 AM" },
+            { company: "IndiGo", price: 5500, time: "10:00 AM" },
+            { company: "SpiceJet", price: 4800, time: "11:00 AM" },
+            { company: "Vistara", price: 6000, time: "12:00 PM" },
+            { company: "GoAir", price: 5200, time: "01:00 PM" },
+            { company: "AirAsia", price: 5300, time: "02:00 PM" },
+            { company: "Jet Airways", price: 6500, time: "03:00 PM" },
+            { company: "Air India", price: 5200, time: "04:00 PM" },
+            { company: "IndiGo", price: 5800, time: "05:00 PM" },
+            { company: "SpiceJet", price: 5000, time: "06:00 PM" }
+        ];
+
+        var flightsList = document.getElementById("flights-list");
+        flightsList.innerHTML = '';
+
+        flights.forEach(function(flight) {
+            var flightBox = document.createElement("div");
+            flightBox.classList.add("flight-box");
+
+            var flightInfo = document.createElement("div");
+            flightInfo.classList.add("flight-info");
+
+            var company = document.createElement("span");
+            company.textContent = flight.company;
+
+            var price = document.createElement("span");
+            price.textContent = flight.price + " INR";
+            price.classList.add("price");
+
+            var time = document.createElement("span");
+            time.textContent = flight.time;
+
+            flightInfo.appendChild(company);
+            flightInfo.appendChild(price);
+            flightInfo.appendChild(time);
+
+            flightBox.appendChild(flightInfo);
+
+            flightBox.addEventListener("click", function() {
+                var selected = document.querySelector(".flight-box.selected");
+                if (selected) {
+                    selected.classList.remove("selected");
+                }
+                flightBox.classList.add("selected");
+            });
+
+            flightsList.appendChild(flightBox);
+        });
+
+        document.getElementById("total-price-btn").disabled = false; // Enable the "Show Total Price" button after flights are loaded
+    }
+
+</script>
+
+</body>
+</html>
