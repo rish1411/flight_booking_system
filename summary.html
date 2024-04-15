@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        .ticket {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .ticket h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .summary-info p {
+            margin: 10px 0;
+        }
+        
+        .summary-info p strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <h1>Booking Summary</h1>
+        <div class="summary-info">
+            <p><strong>Departure:</strong> <span id="departure"></span></p>
+            <p><strong>Destination:</strong> <span id="destination"></span></p>
+            <p><strong>Date:</strong> <span id="date"></span></p>
+            <p><strong>Passengers:</strong> <span id="passengers"></span></p>
+            <p><strong>Flight Price:</strong> <span id="flightPrice"></span> INR</p>
+            <p><strong>Meals:</strong> <span id="meals"></span></p>
+            <p><strong>Total Price:</strong> <span id="totalPrice"></span> INR</p>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve data from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const departure = urlParams.get('departure');
+        const destination = urlParams.get('destination');
+        const date = urlParams.get('date');
+        const passengers = urlParams.get('passengers');
+        const meals = urlParams.getAll('meals');
+        const flightPrice = urlParams.get('flightPrice');
+        const mealPrice = urlParams.get('mealPrice');
+        const totalPrice = parseInt(flightPrice) + parseInt(mealPrice);
+
+        // Display data on the summary page
+        document.getElementById('departure').innerText = departure;
+        document.getElementById('destination').innerText = destination;
+        document.getElementById('date').innerText = date;
+        document.getElementById('passengers').innerText = passengers;
+        document.getElementById('flightPrice').innerText = flightPrice;
+        document.getElementById('meals').innerText = meals.join(', ');
+        document.getElementById('totalPrice').innerText = totalPrice;
+    </script>
+</body>
+</html>
