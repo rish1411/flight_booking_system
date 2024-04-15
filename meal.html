@@ -5,70 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Selection</title>
     <style>
-
-    body {
-        font-family: Arial, sans-serif;
-        background-color: white;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
-
-    .container {
-        margin-top: 100px;
-    }
-
-    button {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 5px;
-    }
-
-    #result {
-        margin-top: 20px;
-    }
-
-    .submit-btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 15px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 20%;
-        margin-top: 10px;
-    }
-
-    .meal-description {
-        margin-top: 50px;
-        font-size: 18px;
-    }
-</style>
-
         body {
             font-family: Arial, sans-serif;
             background-color: white;
             text-align: center;
+            background-image: url("/Users/indumadireddy/Downloads/flight details/bg.png");
+            background-size: 1700px;
+            background-attachment: fixed;
+            background-position: center;
             margin: 0;
             padding: 0;
         }
-
+        
         .container {
-            margin-top: 100px;
+            margin-top: 300px;
+            margin-left: 70px;
+            margin-right: 70px;
         }
-
+        
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 30px 40px;
+            font-size: 20px;
             cursor: pointer;
-            margin: 5px;
         }
-
+        
         #result {
             margin-top: 20px;
         }
-
+        
         .submit-btn {
             background-color: #4CAF50;
             color: white;
@@ -78,18 +42,45 @@
             cursor: pointer;
             width: 20%;
             margin-top: 10px;
+            margin-left: 230px;
+            margin-right: 200px;
+        }
+        
+        .footer {
+            background-color: #070707;
+            color: white;
+            text-size-adjust: 30px;
+            
+            padding-bottom: 90px;
+        }
+        
+        .links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .links a {
+            color: #fffcfc;
+            text-decoration: none;
+            font-size: 13px;
+            line-height: 18px;
+            margin: 0 8px 12px 8px;
         }
 
         .meal-description {
-            margin-top: 50px;
-            font-size: 18px;
+            background-color: #070707;
+            color: #d2d2d2;
+            margin-top: 100px;
+            font-size: 25px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Meal Selection</h1>
+    <h1>Would you like to add a meal:</h1>
     <button id="Chicken" onclick="selectMeal('Chicken', 1000)">Chicken (1000)</button>
     <button id="Fish" onclick="selectMeal('Fish', 1500)">Fish (1500)</button>
     <button id="Vegetarian" onclick="selectMeal('Vegetarian', 800)">Vegetarian (800)</button>
@@ -100,15 +91,13 @@
     <button onclick="selectMeal('None', 0)">None(0)</button>
 
     <div>
-        <h3>Total Price: <span id="totalPrice">0</span> INR</h3>
+        <h3>Total Price: <span id="totalPrice">0</span></h3>
     </div>
     <div id="result"></div>
 </div>
-
 <div>
-    <button type="button" class="submit-btn" onclick="">Submit</button>
+    <button type="button" class="submit-btn" onclick="redirectToSummary()">Next</button>
 </div>
-
 <div class="meal-description">
     <p><strong>Chicken:</strong> A delicious chicken dish served with sides.</p>
     <p><strong>Fish:</strong> Freshly cooked fish with a flavorful sauce.</p>
@@ -118,7 +107,6 @@
     <p><strong>Salad:</strong> Fresh salad with mixed greens and dressings.</p>
     <p><strong>None:</strong> No meal selected.</p>
 </div>
-
 <footer>
     <div class="footer">
         <div class="links">
@@ -129,7 +117,6 @@
         </div>
     </div>
 </footer>
-
 <script>
     let totalPrice = 0;
     let selectedButton = null;
@@ -157,9 +144,16 @@
             });
         }
     }
+
+    function redirectToSummary() {
+        // Get total price and other necessary data
+        var totalPrice = document.getElementById("totalPrice").textContent;
+
+        // Redirect to summary.html with necessary data
+        window.location.href = "summary.html?totalPrice=" + encodeURIComponent(totalPrice);
+    }
 </script>
 
 </body>
 </html>
-
 
