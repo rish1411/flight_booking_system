@@ -4,58 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login/Signup Page</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="site-name">
-    <a href="pop.html">
-    <img class="shadow-pop-bl" src="/Users/indumadireddy/Downloads/logos (1)/FlyEase.png" width=300px height="100px">
-    </a>
-  </div>
-<!-- Login Form -->
-
-<div class="text">
-  
-    <p class="text-focus-in">Welcome to FlyEase!!! <br>First time here?<br>
-      Well don't waste any time and sign up for an easy flying experience<br>
-    Get ready to be blown away with our numerous offers and mind-blowing deals<br>
-  we would be glad to check you in!! </p>
-  </div>
-<div class="container">
-  <div id="login-form">
-    <h2 class="check-in" > Check-in now</h2>
-    <form id="login">
-      <input type="text" id="login-username" placeholder="Create Username" required minlength="6">
-      <input type="password" id="login-password" placeholder="Set Password" required minlength="8">
-      <button type="submit">Signup</button>
-    </form>
-    <div class="form-footer">
-      <p>Already a member? <a href="signup.html">Board here</a></p>
-    </div>
-  </div>
-  </div>
-  <footer>
-  <div class="footer">
-    <div class="links">
-        <a href="#">About</a>
-        <a href="#">Blog</a>
-        <a href="#">Jobs</a>
-        <a href="#">Help</a>
-        <a href="#">API</a>
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Locations</a>
-        <a href="#" id="darkmode-toggle">Darkmode</a>
-    </div>
-</div>
-</footer>
-
-
-<script src="script.js"></script>
-</body>
-</html>
-<html>
-    <style>
+<style>
 body {
   background-color:rgb(24, 23, 23) ;
     font-family: Arial, sans-serif;
@@ -120,15 +69,14 @@ body {
   max-width: 600px; /* Limit the width of the container */
   padding: 20px;
   margin: 20px auto;
-  line height:1.5 ;
+  line-height: 1.5; /* Set the line height to 1.5 */
   position: absolute;
-      top: 150px;
-      left: 150px;
-      margin: 0;
-      border-radius: 300px;
-  
-  
+  top: 150px;
+  left: 150px;
+  margin: 0;
+  border-radius: 300px;
 }
+
 
 .text p {
   
@@ -151,7 +99,6 @@ body {
   max-width: 300px;
 
 }
-  #login-form,
   #signup-form {
     margin: 20px;
     padding: 20px;
@@ -225,47 +172,49 @@ body {
     margin: 0 8px 12px 8px;
 }
   </style>
-  </html>
-  </html>
-    <html>
-    <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  // Get the login and signup forms by their IDs
-  var loginForm = document.getElementById('login');
-  var signupForm = document.getElementById('signup');
+  </head>
+  <body>
+    <div class="site-name">
+      <a href="pop.html">
+      <img class="shadow-pop-bl" src="/Users/anubhav/Downloads/FlyEase.png" width=300px height="100px">
+      </a>
+    </div>
+  <!-- Login Form -->
 
-  // Function to validate the username and password
-  function validateForm(event) {
-    var username = event.target.elements[0].value;
-    var password = event.target.elements[1].value;
-    var minLengthUsername = 6;
-    var minLengthPassword = 8;
+  <div class="text">
+    
+      <p class="text-focus-in">Welcome to FlyEase!!! <br>First time here?<br>
+        Well don't waste any time and sign up for an easy flying experience<br>
+      Get ready to be blown away with our numerous offers and mind-blowing deals<br>
+    we would be glad to check you in!! </p>
+    </div>
+  <div class="container">
+    <div id="signup-form">
+      <h2 class="check-in" > Sign Up Now</h2>
+      <form id="signup">
+        <input type="text" id="signup-username" placeholder="Create Username" required minlength="6">
+        <input type="password" id="signup-password" placeholder="Set Password" required minlength="8">
+        <button type="submit">Signup</button>
+      </form>
+      <div class="form-footer">
+        <p>Already have an account? <a href="home.html">Login</a></p>
+      </div>
+    </div>
+  </div>
 
-    if (username.length < minLengthUsername) {
-      alert('Username must be at least ' + minLengthUsername + ' characters long.');
-      event.preventDefault(); // Prevent form submission
-      return false;
-    }
-
-    if (password.length < minLengthPassword) {
-      alert('Password must be at least ' + minLengthPassword + ' characters long.');
-      event.preventDefault(); // Prevent form submission
-      return false;
-    }
-
-    // If we reach here, everything is valid
-    return true;
-  }
-
-  // Attach submit event listeners to the forms
-  if (loginForm) {
-    loginForm.addEventListener('submit', validateForm);
-  }
-
-  if (signupForm) {
-    signupForm.addEventListener('submit', validateForm);
-  }
-});
-
-</script>
+  <script>
+    document.getElementById("signup").addEventListener("submit", function(event){
+      event.preventDefault();
+      var username = document.getElementById("signup-username").value;
+      var password = document.getElementById("signup-password").value;
+      if(username && password){
+        alert("Signup successful! Welcome, " + username);
+        // Redirect to homepage
+        window.location.href = "home.html";
+      } else {
+        alert("Please fill in all fields");
+      }
+    });
+  </script>
+  </body>
 </html>
