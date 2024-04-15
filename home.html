@@ -265,8 +265,10 @@
     </div>
 
     <div id="flights-list"></div>
-
     <button type="button" class="search-flight-btn" id="total-price-btn" onclick="showTotalPrice()" disabled>Show Total Price</button>
+
+    <button type="button" class="search-flight-btn" id="next-btn" onclick="redirectToMealPage()">Next</button>
+    
 </div>
 
 <footer>
@@ -282,6 +284,135 @@
 
 <script>
     var totalPassengers = 1; // Initial number of passengers
+
+    function redirectToMealPage() {
+        // Get total price and other necessary data
+        var totalPrice = document.getElementById("total-price").textContent;
+
+        // Redirect to meal.html with necessary data
+        window.location.href = "meal.html?totalPrice=" + encodeURIComponent(totalPrice);
+    }
+
+    function addPassenger() {
+        totalPassengers++;
+        var passengersContainer = document.getElementById("passengers-info");
+        var passengerDiv = document.createElement("div");
+        passengerDiv.classList.add("passenger");
+        passengerDiv.innerHTML = `
+            <input type="text" name="passengerName${totalPassengers}" placeholder="Passenger Name">
+            <select name="passengerAge${totalPassengers}">
+                <option value="adult">Adult</option>
+                <option value="child">Less than 15</option>
+            </select>
+        `;
+        passengersContainer.appendChild(passengerDiv);
+    }
+
+    function calculateTotalPrice() {
+        document.getElementById("total-price-btn").disabled = false;
+    }
+
+    function showTotalPrice() {
+        var selectedClass = document.querySelector('input[name="flightClass"]:checked');
+        if (!selectedClass) {
+            showAlert("Please select Economy or Business class.");
+            return;
+        }
+        selectedClass = selectedClass.value;
+
+        var totalPrice = 0;
+
+        // Retrieve the selected flight price from the flight box
+        var selectedFlightPrice = parseFloat(document.querySelector('.flight-box.selected .price').textContent.replace(" INR", ""));
+
+        if (selectedClass === "economy") {
+            totalPrice = selectedFlightPrice;
+        } else if (selectedClass === "business") {
+            totalPrice = selectedFlightPrice + 10000; // Add 10,000 for business class
+        }
+
+        var totalDiv = document.createElement("div");
+        totalDiv.textContent = "Total Price for " + totalPassengers + " Passenger(s) in " + selectedClass + " class: " + totalPrice + " INR";
+        totalDiv.id = "total-price"; // Add an ID to the total price div
+        document.getElementById("flights-list").appendChild(totalDiv);
+    }
+
+    function showAlert(message) {
+        var alertDiv = document.createElement("div");
+        alertDiv.textContent = message;
+        alertDiv.style.color = "red";
+        alertDiv.style.fontWeight = "bold";
+        alertDiv.style.textAlign = "center";
+        document.body.appendChild(alertDiv);
+        setTimeout(function() {
+            alertDiv.remove();
+        }, 3000); // Remove alert after 3 seconds
+    }
+
+    function searchFlights() {
+        var departure = document.getElementById("departure").value;
+        var destination = document.getElementById("destination").value;
+        var date = document.getElementById("date").value;
+
+        // Displaying a message indicating that flights are being searched
+        var searchMessage = document.createElement("div");
+        searchMessage.textContent = "Searching for flights...";
+        document.getElementById("flights-list").innerHTML = ''; // Clear previous flights
+        document.getElementById("flights-list").appendChild(searchMessage);
+
+        // Dummy flight data for demonstration purposes
+        var flights = [
+            { company: "Air India", price: 5000, time: "09:00 AM" },
+            { company: "IndiGo", price: 5500, time: "10:00 AM" },
+            { company: "SpiceJet", price: 4800, time: "11:00 AM" },
+            { company: "Vistara", price: 6000, time: "12:00 PM" },
+            { company: "GoAir", price: 5200, time: "01:00 PM" },
+            { company: "AirAsia", price: 5300, time: "02:00 PM" },
+            { company: "Jet Airways", price: 6500, time: "03:00 PM" },
+            { company: "Air India", price: 5200, time: "04:00 PM" },
+            { company: "IndiGo", price: 5800, time: "05:00 PM" },
+            { company: "SpiceJet", price: 5000, time: "06:00 PM" }
+        ];
+
+        var flightsList = document.getElementById("flights-list");
+        flightsList.innerHTML = '';
+
+        flights.forEach(function(flight) {
+            var flightBox = document.createElement("div");
+            flightBox.classList.add("flight-box");
+
+            var flightInfo = document.createElement("div");
+            flightInfo.classList.add("flight-info");
+
+            var company = document.createElement("span");
+            company.textContent = flight.company;
+
+            var price = document.createElement("span");
+            price.textContent = flight.price + " INR";
+            price.classList.add("price");
+
+            var time = document.createElement("span");
+            time.textContent = flight.time;
+
+            flightInfo.appendChild(company);
+            flightInfo.appendChild(price);
+            flightInfo.appendChild(time);
+
+            flightBox.appendChild(flightInfo);
+
+            flightBox.addEventListener("click", function() {
+                var selected = document.querySelector(".flight-box.selected");
+                if (selected) {
+                    selected.classList.remove("selected");
+                }
+                flightBox.classList.add("selected");
+            });
+
+            flightsList.appendChild(flightBox);
+        });
+
+        document.getElementById("total-price-btn").disabled = false; // Enable the "Show Total Price" button after flights are loaded
+    }
 
     function addPassenger() {
         totalPassengers++;
